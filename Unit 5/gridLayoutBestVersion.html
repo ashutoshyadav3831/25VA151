@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GRID LAYOUT BEST VERSION</title>
+    <style>
+        body {
+            display: flexbox;
+            box-sizing: border-box;
+        }
+        .logo {
+            background-color: lightblue;
+            text-align: center;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        header {
+            background-color: lightgreen;
+            text-align: center;
+            padding: 20px;
+            margin: 10px;
+        }
+        .area {
+            background-color: lightcoral;
+            text-align: center;
+            padding: 20px;
+            margin: 10px;
+        }
+        #boxes {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 10px;
+            margin: 10px;
+        }
+        .box {
+            background-color: lightgoldenrodyellow;
+            height: 300px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        footer {
+            grid-area: footer;
+            background-color: lightgray;
+            text-align: center;
+            padding: 20px;
+        }
+        </style>
+</head>
+<body>
+    <div class="logo">
+        <h2>LOGO</h2>
+    </div>
+    <header>
+        <h1>HEADER</h1>
+    </header>
+    <div class="area">
+        <h2>TEXT AREA</h2>
+    </div>
+    <div id="boxes">
+        <div class="box">BOX1</div>
+        <div class="box">BOX2</div>
+        <div class="box">BOX3</div>
+    </div>
+    <footer>
+        <h2>FOOTER</h2>
+    </footer>
+</body>
+</html>
