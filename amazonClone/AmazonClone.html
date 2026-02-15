@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Amazon Clone</title>
+
+    <style>
+        :root {
+            --dark: #131921;
+            --dark2: #232f3e;
+            --yellow: #febd69;
+            --green: #067d62;
+            --shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            background: #e3e6e6;
+        }
+
+        .navbar {
+            background: var(--dark);
+            color: white;
+            display: grid;
+            grid-template-columns: 150px 1fr 300px;
+            align-items: center;
+            padding: 10px 20px;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: #ff9900;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .logo:hover {
+            outline: 1px solid white;
+        }
+
+        .search {
+            display: flex;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .search select,
+        .search input {
+            padding: 8px;
+            border: none;
+        }
+
+        .search input {
+            flex: 1;
+        }
+
+        .search button {
+            background: var(--yellow);
+            border: none;
+            padding: 8px 14px;
+            cursor: pointer;
+        }
+
+        .search:hover {
+            box-shadow: 0 0 0 2px #f90;
+        }
+
+        .nav-right {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+        }
+
+        .nav-right div {
+            padding: 6px 8px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .nav-right div:hover {
+            outline: 1px solid white;
+        }
+
+        .subnav {
+            background: var(--dark2);
+            color: white;
+            padding: 8px 20px;
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .subnav span {
+            cursor: pointer;
+            padding: 4px 6px;
+            border-radius: 2px;
+        }
+
+        .subnav span:hover {
+            background: #37475a;
+            outline: 1px solid white;
+        }
+
+        .hero {
+            background: url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f') center/cover no-repeat;
+            height: 320px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .hero-msg {
+            background: white;
+            padding: 14px 20px;
+            margin-bottom: 20px;
+            width: 82%;
+            text-align: center;
+            box-shadow: var(--shadow);
+            font-size: 15px;
+        }
+
+        .shop {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+            padding: 20px;
+        }
+
+        .box {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: var(--shadow);
+        }
+
+        .box h2 {
+            font-size: 18px;
+            margin-bottom: 12px;
+        }
+
+        .box-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .box a {
+            margin-top: 10px;
+            display: block;
+            font-size: 14px;
+            color: #007185;
+            text-decoration: none;
+        }
+
+        .box a:hover {
+            text-decoration: underline;
+        }
+
+        .product {
+            border: 1px solid #eee;
+            padding: 10px;
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            align-items: center;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+
+        .product:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .product img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            transition: 0.3s;
+        }
+
+        .product:hover img {
+            transform: scale(1.05);
+        }
+
+        .product p {
+            font-size: 13px;
+            text-align: center;
+        }
+
+        .price {
+            color: var(--green);
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .buy-btn {
+            background: var(--yellow);
+            border: none;
+            padding: 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 13px;
+            width: 100%;
+        }
+
+        .buy-btn:hover {
+            background: #f3a847;
+        }
+
+        .history {
+            background: white;
+            margin: 10px 20px 30px;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: var(--shadow);
+        }
+
+        .history h2 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .history-row {
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+            padding-bottom: 6px;
+        }
+
+        .history-item {
+            min-width: 160px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            padding: 10px;
+            text-align: center;
+            transition: 0.25s;
+            cursor: pointer;
+        }
+
+        .history-item:hover {
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .history-item img {
+            width: 100%;
+            height: 100px;
+            object-fit: cover;
+        }
+
+        .history-item p {
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        footer {
+            margin-top: 30px;
+        }
+
+        .foot-top {
+            background: #37475a;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            cursor: pointer;
+        }
+
+        .foot-top:hover {
+            background: #485769;
+        }
+
+        .foot-main {
+            background: var(--dark2);
+            color: #ddd;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 40px 20px;
+            font-size: 14px;
+        }
+
+        .foot-main h4 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .foot-main p {
+            margin: 6px 0;
+            cursor: pointer;
+        }
+
+        .foot-main p:hover {
+            text-decoration: underline;
+        }
+
+        .foot-bottom {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 13px;
+        }
+
+        @media(max-width:1000px) {
+            .shop {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width:600px) {
+            .navbar {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-right {
+                display: none;
+            }
+
+            .shop {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="navbar">
+        <div class="logo">amazon</div>
+        <div class="search">
+            <select>
+                <option>All</option>
+            </select>
+            <input placeholder="Search Amazon">
+            <button>🔍</button>
+        </div>
+        <div class="nav-right">
+            <div>Hello, Sign in<br><b>Account</b></div>
+            <div>Returns<br><b>& Orders</b></div>
+            <div>🛒 Cart</div>
+        </div>
+    </div>
+
+    <div class="subnav">
+        <span>☰ All</span>
+        <span>Best Sellers</span>
+        <span>Mobiles</span>
+        <span>Customer Service</span>
+        <span>Electronics</span>
+    </div>
+
+    <div class="hero">
+        <div class="hero-msg">Great deals on electronics, fashion & more</div>
+    </div>
+
+    <div class="shop">
+        <div class="box">
+            <h2>Gaming Accessories</h2>
+            <div class="box-grid">
+                <div class="product"><img src="Controller.jpg">
+                    <p>Cosmic Byte Controller</p>
+                    <p class="price">₹1,899</p><button class="buy-btn">Add to Cart</button>
+                </div>
+                <div class="product"><img src="Keyboard.jpg">
+                    <p>Mechanical Keyboard</p>
+                    <p class="price">₹2,499</p><button class="buy-btn">Add to Cart</button>
+                </div>
+            </div>
+            <a href="#">See more</a>
+        </div>
+
+        <div class="box">
+            <h2>Home Decor</h2>
+            <div class="box-grid">
+                <div class="product"><img src="Lights.jpg">
+                    <p>LED String Lights</p>
+                    <p class="price">₹699</p><button class="buy-btn">Add to Cart</button>
+                </div>
+                <div class="product"><img src="Showpiece.webp">
+                    <p>Modern Showpiece</p>
+                    <p class="price">₹1,299</p><button class="buy-btn">Add to Cart</button>
+                </div>
+            </div>
+            <a href="#">See more</a>
+        </div>
+
+        <div class="box">
+            <h2>Fashion</h2>
+            <div class="box-grid">
+                <div class="product"><img src="Dress.webp">
+                    <p>Floral Dress</p>
+                    <p class="price">₹1,499</p><button class="buy-btn">Add to Cart</button>
+                </div>
+                <div class="product"><img src="Jacket.webp">
+                    <p>Winter Jacket</p>
+                    <p class="price">₹2,999</p><button class="buy-btn">Add to Cart</button>
+                </div>
+            </div>
+            <a href="#">See more</a>
+        </div>
+
+        <div class="box">
+            <h2>Electronics</h2>
+            <div class="box-grid">
+                <div class="product"><img src="Laptop.jpg">
+                    <p>Lenovo Ideapad Slim 3</p>
+                    <p class="price">₹52,990</p><button class="buy-btn">Add to Cart</button>
+                </div>
+                <div class="product"><img src="Projector.webp">
+                    <p>Egate i9 Projector</p>
+                    <p class="price">₹9,999</p><button class="buy-btn">Add to Cart</button>
+                </div>
+            </div>
+            <a href="#">See more</a>
+        </div>
+    </div>
+
+    <div class="history">
+        <h2>Browsing History</h2>
+        <div class="history-row">
+            <div class="history-item"><img src="Laptop.jpg">
+                <p>Lenovo Laptop</p>
+            </div>
+            <div class="history-item"><img src="Controller.jpg">
+                <p>Controller</p>
+            </div>
+            <div class="history-item"><img src="Dress.webp">
+                <p>Dress</p>
+            </div>
+            <div class="history-item"><img src="Keyboard.jpg">
+                <p>Keyboard</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="foot-top">Back to top</div>
+        <div class="foot-main">
+            <div>
+                <h4>Get to Know Us</h4>
+                <p>About Us</p>
+                <p>Careers</p>
+            </div>
+            <div>
+                <h4>Connect</h4>
+                <p>Facebook</p>
+                <p>Twitter</p>
+            </div>
+            <div>
+                <h4>Make Money</h4>
+                <p>Sell on Amazon</p>
+            </div>
+            <div>
+                <h4>Help</h4>
+                <p>Customer Service</p>
+            </div>
+        </div>
+        <div class="foot-bottom">© 2025 Amazon Clone</div>
+    </footer>
+
+</body>
+
+</html>
